@@ -17,10 +17,11 @@ public class LeerFichero extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html");
-		ArrayList<String> diccionario = new ArrayList<String>();
 
+		ArrayList<String> diccionario = new ArrayList<String>();
+//Lee el fichero con todas las palabras del diccionario español y las añade al array
 		try {
-			BufferedReader bf = new BufferedReader(new FileReader("/home/jose/espa~nol.words"));
+			BufferedReader bf = new BufferedReader(new FileReader("espa~nol.words"));
 			String palabras = "";
 
 			while (palabras != null) {
@@ -34,6 +35,7 @@ public class LeerFichero extends HttpServlet {
 
 		}
 		try {
+			//Lee el fichero que se ha introducido en el formulario
 			BufferedReader bf = new BufferedReader(new FileReader(request.getParameter("fichero")));
 			String linea = "";
 			String color = "black";
@@ -41,10 +43,13 @@ public class LeerFichero extends HttpServlet {
 			PrintWriter out = response.getWriter();
 
 			int i = 0;
+			out.print("<b>Lo marcado en naranja son las palabras encontradas</b><br/>");
 			while (linea != null) {
 
 				linea = bf.readLine();
 				int numTokens = 0;
+				
+				//Coge todas las palabras de cada linea y las muestra, y las que coincidan con las palabras del diccionario las pinta en naranja
 				if (linea != null) {
 					StringTokenizer st = new StringTokenizer(linea);
 
@@ -69,9 +74,9 @@ public class LeerFichero extends HttpServlet {
 			out.print("<br/><a href=\"Redirigir\">Volver atrás<a><br/>");
 
 			bf.close();
-		} catch (IOException e) {
+		} catch (IOException e) { //Lo que se mostrará en el caso de que no encuentre el fichero
 			PrintWriter out = response.getWriter();
-			out.print("<h1>Este fichero no existe</h1><br/>");
+			out.print("<h1>Este fichero no existe</h1>");
 			out.print("<a href=\"Redirigir\">Volver atrás<a><br/>");
 
 		}
