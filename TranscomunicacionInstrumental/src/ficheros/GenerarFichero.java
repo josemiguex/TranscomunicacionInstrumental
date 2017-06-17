@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 public class GenerarFichero extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String error = "no";
+		boolean error = false;
 		//Creo un array que contiene los porcentajes para los carácteres y el array con los carácteres
 		double[] porcentajes = { 0, 17.599, 28.706, 38.866, 46.245, 52.086, 57.231, 62.28, 67.254, 72.069, 75, 944,
 				79.268, 82.377, 85.395, 87.499, 89.457, 90.944, 92.497, 93.906, 94.931, 95.824, 96.7, 97.495, 98.28,
@@ -68,7 +68,7 @@ public class GenerarFichero extends HttpServlet {
 						int probabilidad = (int) (Math.random() * 101);
 
 						//Si la variable es mayor a 5, se introducirá en el fichero un caracter
-						if (probabilidad > 5) {
+						if (probabilidad > 3) {
 							while (i < porcentajes.length) {
 								double porcentaje = (double) (Math.random() * 100);
 								if (porcentaje >= porcentajes[i] && porcentaje < porcentajes[i + 1]) {
@@ -95,10 +95,10 @@ public class GenerarFichero extends HttpServlet {
 			bf.close();
 		} catch (IOException ioe) {
 			System.out.println("No se ha podido escribir en el fichero");
-			error = "yes";
+			error = true;
 		}
-		
-		String nextJSP = "/Pagina1.jsp?error=" + error + "";
+		request.setAttribute("error1", error);
+		String nextJSP = "/Pagina0.jsp";
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextJSP);
 		dispatcher.forward(request, response);
 	}

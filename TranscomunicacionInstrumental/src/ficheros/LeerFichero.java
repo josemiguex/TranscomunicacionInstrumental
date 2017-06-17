@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -71,13 +72,15 @@ public class LeerFichero extends HttpServlet {
 				}
 
 			}
-			out.print("<br/><a href=\"Redirigir\">Volver atrás<a><br/>");
+			out.print("<br/><a href=\"Pagina0.jsp\"><button type=\"button\">Volver atrás</button><a><br/>");
 
 			bf.close();
 		} catch (IOException e) { //Lo que se mostrará en el caso de que no encuentre el fichero
 			PrintWriter out = response.getWriter();
-			out.print("<h1>Este fichero no existe</h1>");
-			out.print("<a href=\"Redirigir\">Volver atrás<a><br/>");
+			request.setAttribute("error2", true);
+			String nextJSP = "/Pagina0.jsp";
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextJSP);
+			dispatcher.forward(request, response);
 
 		}
 	}
