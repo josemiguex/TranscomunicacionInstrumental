@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	id="WebApp_ID" version="3.1">
+	<display-name>ProyectoFP</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+	
+
+			<servlet>
+		<servlet-name>GenerarFichero</servlet-name>
+		<servlet-class>ficheros.GenerarFichero</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GenerarFichero</servlet-name>
+		<url-pattern>/GenerarFichero</url-pattern>
+	</servlet-mapping>
+	
+				<servlet>
+		<servlet-name>LeerFichero</servlet-name>
+		<servlet-class>ficheros.LeerFichero</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LeerFichero</servlet-name>
+		<url-pattern>/LeerFichero</url-pattern>
+	</servlet-mapping>
+	
+			<servlet>
+		<servlet-name>Redirigir</servlet-name>
+		<servlet-class>ficheros.Redirigir</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Redirigir</servlet-name>
+		<url-pattern>/Redirigir</url-pattern>
+	</servlet-mapping>
+	
+	<resource-ref>
+		<description>ProyectoFP Connection</description>
+		<res-ref-name>jdbc/ProyectoFP</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+	</resource-ref>
+</web-app>
